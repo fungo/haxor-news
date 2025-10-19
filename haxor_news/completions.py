@@ -95,14 +95,12 @@ META_LOOKUP = {
     "-cc": "Clear the comment cache before executing.",
     "--browser": "View in a browser instead of the terminal (flag)",
     "-b": "View in a browser instead of the terminal (flag)",
-    "--id_post "
-    + WHO_IS_HIRING_POST_ID: (
+    "--id_post " + WHO_IS_HIRING_POST_ID: (
         "View matching comments from "
         "the (optional) post id instead"
         " of the latest post (int)"
     ),
-    "-i "
-    + WHO_IS_HIRING_POST_ID: (
+    "-i " + WHO_IS_HIRING_POST_ID: (
         "View matching comments from "
         "the (optional) post id instead"
         " of the latest post (int)"

@@ -1,8 +1,6 @@
 ![Imgur](http://i.imgur.com/C4mkc3L.gif)
 
-[![Build Status](https://travis-ci.org/donnemartin/haxor-news.svg?branch=master)](https://travis-ci.org/donnemartin/haxor-news)
-
-[![PyPI version](https://badge.fury.io/py/haxor-news.svg)](http://badge.fury.io/py/haxor-news) [![PyPI](https://img.shields.io/pypi/pyversions/haxor-news.svg)](https://pypi.python.org/pypi/haxor-news/) [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+[![Build Status](https://github.com/donnemartin/haxor-news/workflows/Test/badge.svg)](https://github.com/donnemartin/haxor-news/actions) [![PyPI version](https://badge.fury.io/py/haxor-news.svg)](http://badge.fury.io/py/haxor-news) [![PyPI](https://img.shields.io/pypi/pyversions/haxor-news.svg)](https://pypi.python.org/pypi/haxor-news/) [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 haxor-news
 =================
@@ -369,12 +367,6 @@ Run commands:
 It is recommended that you install Python packages in a [virtualenv](http://docs.python-guide.org/en/latest/dev/virtualenvs/) to avoid potential issues with dependencies or permissions.
 
 To view `haxor-news` `virtualenv` installation instructions, click [here](https://github.com/donnemartin/haxor-news/blob/master/INSTALLATION.md).
-
-### Mac OS X 10.11 El Capitan Users
-
-There is a known issue with Apple and its included python package dependencies (more info at https://github.com/pypa/pip/issues/3165). We are investigating ways to fix this issue but in the meantime, to install haxor-news, you can run:
-
-    $ sudo pip install haxor-news --upgrade --ignore-installed six
 
 ### Supported Python Versions
 
