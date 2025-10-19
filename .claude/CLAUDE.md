@@ -46,11 +46,11 @@ python tests/run_tests.py
 All tools configured in `pyproject.toml`:
 
 ```bash
-# Format code with Black
-black .
+# Format code with Ruff
+ruff format .
 
 # Check formatting without changes
-black --check .
+ruff format --check .
 
 # Lint with Ruff
 ruff check .
@@ -62,7 +62,7 @@ ruff check --fix .
 mypy -m haxor_news
 ```
 
-**Important**: The `haxor_news/lib/haxor/` directory contains third-party code and is excluded from Black, Ruff, and MyPy checks.
+**Important**: The `haxor_news/lib/haxor/` directory contains third-party code and is excluded from Ruff and MyPy checks.
 
 ## Before Committing
 
@@ -76,7 +76,6 @@ source .venv/bin/activate
 pytest
 
 # Format code
-black .
 ruff format .
 
 # Check linting

@@ -26,13 +26,13 @@ jobs:
     - name: Run tests
       run: |
         python -m pytest -vv
-    - name: Run Black
+    - name: Check formatting with Ruff
       run: |
-        black --check .
+        ruff format --check .
     - name: Run mypy
       run: |
         mypy -m haxor_news
-    - name: Run ruff
+    - name: Run ruff check
       run: |
         ruff check .
     - name: Check it builds
