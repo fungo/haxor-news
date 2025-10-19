@@ -13,7 +13,7 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-import pip
+import importlib.metadata
 import pexpect
 from tests.compat import unittest
 
@@ -30,21 +30,37 @@ class CliTest(unittest.TestCase):
     def step_cli_installed(self):
         """Make sure haxor is in installed packages.
         """
-        dists = set([di.key for di in pip.get_installed_distributions()])
-        assert 'haxor-news' in dists
+        try:
+            importlib.metadata.version('haxor-news')
+        except importlib.metadata.PackageNotFoundError:
+            assert False, 'haxor-news not installed'
 
     def step_run_cli(self):
         """Run the process using pexpect.
         """
-        self.cli = pexpect.spawnu('haxor-news')
+        self.cli = pexpect.spawnu('haxor-news', timeout=10)
 
     def step_see_prompt(self):
         """Expect to see prompt.
         """
-        self.cli.expect('haxor> ')
+        try:
+            # Wait for version and syntax lines first
+            self.cli.expect('Version:', timeout=5)
+            self.cli.expect('Syntax:', timeout=5)
+            # Then wait for prompt
+            self.cli.expect('haxor>', timeout=5)
+        except pexpect.TIMEOUT:
+            print("Output received before timeout:")
+            print(self.cli.before)
+            raise
 
     def step_send_ctrld(self):
         """Send Ctrl + D to exit.
         """
         self.cli.sendcontrol('d')
-        self.cli.expect(pexpect.EOF)
+        try:
+            self.cli.expect(pexpect.EOF, timeout=5)
+        except pexpect.TIMEOUT:
+            print("Output after Ctrl+D:")
+            print(self.cli.before)
+            raise

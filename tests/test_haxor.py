@@ -43,19 +43,22 @@ class HaxorTest(unittest.TestCase):
 
     @mock.patch('haxor_news.haxor.subprocess.call')
     def test_run_command(self, mock_subprocess_call):
-        document = mock.Mock()
-        document.text = 'hn view 1 -c'
-        self.haxor.run_command(document)
+        text = 'hn view 1 -c'
+        self.haxor.run_command(text)
         mock_subprocess_call.assert_called_with('hn view 1 -c | less -r',
                                                 shell=True)
-        document.text = 'hn view 1'
-        self.haxor.run_command(document)
+        text = 'hn view 1'
+        self.haxor.run_command(text)
         mock_subprocess_call.assert_called_with('hn view 1',
                                                 shell=True)
 
-    @mock.patch('haxor_news.haxor.sys.exit')
-    def test_exit_command(self, mock_sys_exit):
-        document = mock.Mock()
-        document.text = 'exit'
-        self.haxor.handle_exit(document)
-        mock_sys_exit.assert_called_with()
+    def test_exit_command(self):
+        text = 'exit'
+        result = self.haxor.handle_exit(text)
+        assert result is True
+        text = 'quit'
+        result = self.haxor.handle_exit(text)
+        assert result is True
+        text = 'hn view 1'
+        result = self.haxor.handle_exit(text)
+        assert result is False
