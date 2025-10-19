@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Copyright 2015 Donne Martin. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
@@ -14,30 +12,30 @@
 # language governing permissions and limitations under the License.
 
 
-import mock
 import os
-from tests.compat import unittest
+from unittest import mock
 
 from haxor_news.hacker_news import HackerNews
+from tests.compat import unittest
 from tests.mock_hacker_news_api import MockHackerNewsApi
 
 
 class ConfigTest(unittest.TestCase):
-
     def setUp(self):
         self.hn = HackerNews()
         self.hn.hacker_news_api = MockHackerNewsApi()
         self.limit = len(self.hn.hacker_news_api.items)
         self.valid_id = 0
         self.invalid_id = 9000
-        self.query = 'foo'
+        self.query = "foo"
 
     def test_config(self):
-        expected = os.path.join(os.path.abspath(os.environ.get('HOME', '')),
-                                self.hn.config.CONFIG)
+        expected = os.path.join(
+            os.path.abspath(os.environ.get("HOME", "")), self.hn.config.CONFIG
+        )
         assert self.hn.config.get_config_path(self.hn.config.CONFIG) == expected
 
-    @mock.patch('haxor_news.config.Config.save_cache')
+    @mock.patch("haxor_news.config.Config.save_cache")
     def test_clear_item_cache(self, mock_save_cache):
         item_ids = self.hn.config.item_ids
         self.hn.config.clear_item_cache()
@@ -54,8 +52,8 @@ class ConfigTest(unittest.TestCase):
         item_cache = self.hn.config.item_cache
         assert item_cache == [3, 4, 5]
 
-    @mock.patch('haxor_news.hacker_news.HackerNews.view')
-    @mock.patch('haxor_news.config.Config.clear_item_cache')
+    @mock.patch("haxor_news.hacker_news.HackerNews.view")
+    @mock.patch("haxor_news.config.Config.clear_item_cache")
     def test_view_comment_clear_cache(self, mock_clear_item_cache, mock_view):
         index = 0
         comments = False
@@ -65,11 +63,21 @@ class ConfigTest(unittest.TestCase):
         comments_clear_cache = True
         browser = False
         self.hn.view_setup(
-            index, self.query, comments, comments_recent,
-            comments_unseen, comments_hide_non_matching,
-            comments_clear_cache, browser)
+            index,
+            self.query,
+            comments,
+            comments_recent,
+            comments_unseen,
+            comments_hide_non_matching,
+            comments_clear_cache,
+            browser,
+        )
         comments_expected = True
         mock_clear_item_cache.assert_called_with()
         mock_view.assert_called_with(
-            index, self.hn.QUERY_UNSEEN, comments_expected,
-            comments_hide_non_matching, browser)
+            index,
+            self.hn.QUERY_UNSEEN,
+            comments_expected,
+            comments_hide_non_matching,
+            browser,
+        )

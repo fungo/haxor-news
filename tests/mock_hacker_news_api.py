@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Copyright 2015 Donne Martin. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
@@ -16,8 +14,7 @@
 from haxor_news.lib.haxor.haxor import InvalidItemID, InvalidUserID
 
 
-class MockItem(object):
-
+class MockItem:
     def __init__(self):
         self.item_id = None
         self.by = None
@@ -30,8 +27,7 @@ class MockItem(object):
         self.descendants = None
 
 
-class MockUser(object):
-
+class MockUser:
     def __init__(self):
         self.user_id = None
         self.created = None
@@ -39,8 +35,7 @@ class MockUser(object):
         self.submitted = None
 
 
-class MockHackerNewsApi(object):
-
+class MockHackerNewsApi:
     def __init__(self):
         self.items = self._generate_mock_items()
         self.users = self._generate_mock_users()
@@ -49,35 +44,35 @@ class MockHackerNewsApi(object):
         items = []
         item0 = MockItem()
         item0.item_id = 0
-        item0.by = 'foo'
+        item0.by = "foo"
         item0.submission_time = None
-        item0.text = 'text foo'
+        item0.text = "text foo"
         item0.kids = [1]
-        item0.url = 'foo.com'
+        item0.url = "foo.com"
         item0.score = 10
-        item0.title = 'title foo'
+        item0.title = "title foo"
         item0.descendants = 2
         items.append(item0)
         item1 = MockItem()
         item1.item_id = 1
-        item1.by = 'bar'
+        item1.by = "bar"
         item1.submission_time = None
-        item1.text = 'text bar'
+        item1.text = "text bar"
         item1.kids = [2]
-        item1.url = 'bar.com'
+        item1.url = "bar.com"
         item1.score = 20
-        item1.title = 'title bar'
+        item1.title = "title bar"
         item1.descendants = 1
         items.append(item1)
         item2 = MockItem()
         item2.item_id = 2
-        item2.by = 'baz'
+        item2.by = "baz"
         item2.submission_time = None
-        item2.text = 'text baz'
+        item2.text = "text baz"
         item2.kids = []
-        item2.url = 'baz.com'
+        item2.url = "baz.com"
         item2.score = 30
-        item2.title = 'title baz'
+        item2.title = "title baz"
         item2.descendants = 0
         items.append(item2)
         return items
@@ -85,13 +80,13 @@ class MockHackerNewsApi(object):
     def _generate_mock_users(self):
         users = []
         user0 = MockUser()
-        user0.user_id = 'foo'
+        user0.user_id = "foo"
         user0.created = None
         user0.karma = 10
         user0.submitted = [0, 2]
         users.append(user0)
         user1 = MockUser()
-        user1.user_id = 'bar'
+        user1.user_id = "bar"
         user1.created = None
         user1.karma = 20
         user1.submitted = [1]
@@ -109,7 +104,7 @@ class MockHackerNewsApi(object):
             else:
                 raise InvalidItemID
         except IndexError:
-            raise InvalidItemID
+            raise InvalidItemID from None
 
     def get_user(self, user_id):
         for user in self.users:

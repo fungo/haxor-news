@@ -41,6 +41,8 @@ htmlcov/
 nosetests.xml
 coverage.xml
 *,cover
+.pytest_cache/
+.hypothesis/
 
 # Translations
 *.mo
@@ -54,6 +56,28 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Ruff
+.ruff_cache/
+
+# pyenv
+.python-version
+
+# Virtual environments
+venv/
+ENV/
 
 # Misc
 scratch/

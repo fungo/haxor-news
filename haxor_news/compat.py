@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Copyright 2015 Donne Martin. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
@@ -13,8 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-import configparser
-from urllib.parse import urlparse
-from urllib.request import urlretrieve
-from urllib.error import URLError
-import html as HTMLParser
+import configparser  # noqa: F401
+import html as HTMLParser  # noqa: F401
+from urllib.error import URLError  # noqa: F401
+from urllib.parse import urlparse  # noqa: F401
+from urllib.request import urlretrieve  # noqa: F401
