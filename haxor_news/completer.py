@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Copyright 2015 Donne Martin. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
@@ -16,7 +14,7 @@
 
 from prompt_toolkit.completion import Completer
 
-from .completions import SUBCOMMANDS, ARGS_OPTS_LOOKUP
+from .completions import ARGS_OPTS_LOOKUP, SUBCOMMANDS
 
 
 class Completer(Completer):
@@ -46,7 +44,7 @@ class Completer(Completer):
         :rtype: bool
         :return: Specifies whether we are currently completing the hn command.
         """
-        if len(words) == 1 and word_before_cursor != '':
+        if len(words) == 1 and word_before_cursor != "":
             return True
         else:
             return False
@@ -64,8 +62,9 @@ class Completer(Completer):
         :rtype: bool
         :return: Specifies whether we are currently completing a subcommand.
         """
-        if (len(words) == 1 and word_before_cursor == '') \
-                or (len(words) == 2 and word_before_cursor != ''):
+        if (len(words) == 1 and word_before_cursor == "") or (
+            len(words) == 2 and word_before_cursor != ""
+        ):
             return True
         else:
             return False
@@ -83,8 +82,9 @@ class Completer(Completer):
         :rtype: bool
         :return: Specifies whether we are currently completing an arg.
         """
-        if (len(words) == 2 and word_before_cursor == '') \
-                or (len(words) == 3 and word_before_cursor != ''):
+        if (len(words) == 2 and word_before_cursor == "") or (
+            len(words) == 3 and word_before_cursor != ""
+        ):
             return True
         else:
             return False
@@ -103,11 +103,12 @@ class Completer(Completer):
         :return: A list of options.
         """
         options = []
-        for subcommand, args_opts in ARGS_OPTS_LOOKUP.items():
-            if subcommand in words and \
-                (words[-2] == subcommand or
-                    self.completing_subcommand_option_util(subcommand, words)):
-                options.extend(ARGS_OPTS_LOOKUP[subcommand]['opts'])
+        for subcommand, _args_opts in ARGS_OPTS_LOOKUP.items():
+            if subcommand in words and (
+                words[-2] == subcommand
+                or self.completing_subcommand_option_util(subcommand, words)
+            ):
+                options.extend(ARGS_OPTS_LOOKUP[subcommand]["opts"])
         return options
 
     def completing_subcommand_option_util(self, option, words):
@@ -143,12 +144,12 @@ class Completer(Completer):
         :rtype: list
         :return: A list of completions.
         """
-        if 'hn' not in words:
+        if "hn" not in words:
             return []
-        for subcommand, args_opts in ARGS_OPTS_LOOKUP.items():
+        for subcommand, _args_opts in ARGS_OPTS_LOOKUP.items():
             if subcommand in words:
-                return [ARGS_OPTS_LOOKUP[subcommand]['args']]
-        return ['10']
+                return [ARGS_OPTS_LOOKUP[subcommand]["args"]]
+        return ["10"]
 
     def get_completions(self, document, complete_event):
         """Get completions for the current scope.
@@ -168,9 +169,9 @@ class Completer(Completer):
         if len(words) == 0:
             return commands
         if self.completing_command(words, word_before_cursor):
-            commands = ['hn']
+            commands = ["hn"]
         else:
-            if 'hn' not in words:
+            if "hn" not in words:
                 return commands
             if self.completing_subcommand(words, word_before_cursor):
                 commands = list(SUBCOMMANDS.keys())
@@ -179,8 +180,9 @@ class Completer(Completer):
                     commands = self.arg_completions(words, word_before_cursor)
                 else:
                     commands = self.completing_subcommand_option(
-                        words,
-                        word_before_cursor)
+                        words, word_before_cursor
+                    )
         completions = self.text_utils.find_matches(
-            word_before_cursor, commands, fuzzy=self.fuzzy_match)
+            word_before_cursor, commands, fuzzy=self.fuzzy_match
+        )
         return completions

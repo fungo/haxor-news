@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Copyright 2015 Donne Martin. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
@@ -13,10 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-from pygments.token import Token
 
-
-class Toolbar(object):
+class Toolbar:
     """Show information about the aws-shell in a tool bar.
 
     :type handler: callable
@@ -48,6 +44,6 @@ class Toolbar(object):
             # else:
             #     paginate_comments = 'OFF'
             # return ' [F2] Paginate Comments: {0}  [F10] Exit '.format(paginate_comments)
-            return ' [F10] Exit '
+            return " [F10] Exit "
 
         return get_toolbar_items

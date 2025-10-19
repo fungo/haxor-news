@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Copyright 2015 Donne Martin. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
@@ -14,16 +12,12 @@
 # language governing permissions and limitations under the License.
 
 
-from tests.compat import unittest
-
-from pygments.token import Token
-
 from haxor_news.haxor import Haxor
 from haxor_news.toolbar import Toolbar
+from tests.compat import unittest
 
 
 class ToolbarTest(unittest.TestCase):
-
     def setUp(self):
         self.haxor = Haxor()
         self.toolbar = Toolbar(lambda: self.haxor.paginate_comments)
@@ -31,11 +25,11 @@ class ToolbarTest(unittest.TestCase):
     def test_toolbar_on(self):
         self.haxor.paginate_comments = True
         # In prompt-toolkit 3.x, toolbar returns a string
-        expected = ' [F10] Exit '
+        expected = " [F10] Exit "
         assert expected == self.toolbar.handler()
 
     def test_toolbar_off(self):
         self.haxor.paginate_comments = False
         # In prompt-toolkit 3.x, toolbar returns a string
-        expected = ' [F10] Exit '
+        expected = " [F10] Exit "
         assert expected == self.toolbar.handler()

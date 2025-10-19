@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Copyright 2015 Donne Martin. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
@@ -14,18 +12,20 @@
 # language governing permissions and limitations under the License.
 
 
-import click
 import time
+
+import click
 
 
 def timeit(method):
-    """From: https://www.andreas-jung.com/contents/a-python-decorator-for-measuring-the-execution-time-of-methods  # NOQA
-    """
+    """From: https://www.andreas-jung.com/contents/a-python-decorator-for-measuring-the-execution-time-of-methods  # NOQA"""
+
     def timed(*args, **kw):
         ts = time.time()
         result = method(*args, **kw)
         te = time.time()
-        message = '%r (%r, %r) %2.2f sec' % (method.__name__, args, kw, te-ts)
-        click.secho(message + '\n', fg='red')
+        message = f"{method.__name__!r} ({args!r}, {kw!r}) {te - ts:2.2f} sec"
+        click.secho(message + "\n", fg="red")
         return result
+
     return timed

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Copyright 2015 Donne Martin. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
@@ -16,12 +14,13 @@
 
 import re
 import shlex
+
 from prompt_toolkit.completion import Completion
 
 from .completions import META_LOOKUP
 
 
-class TextUtils(object):
+class TextUtils:
     """Utilities for parsing and matching text."""
 
     def find_matches(self, word, collection, fuzzy):
@@ -40,9 +39,7 @@ class TextUtils(object):
         :return: Yields an instance of `prompt_toolkit.completion.Completion`.
         """
         word = self._last_token(word).lower()
-        for suggestion in self._find_collection_matches(
-                word, collection, fuzzy):
-            yield suggestion
+        yield from self._find_collection_matches(word, collection, fuzzy)
 
     def get_tokens(self, text):
         """Parse out all tokens.
@@ -74,7 +71,7 @@ class TextUtils(object):
                 word = self._safe_split(text)[-1]
                 word = word.strip()
                 return word
-        return ''
+        return ""
 
     def _fuzzy_finder(self, text, collection, case_sensitive=True):
         """Customized fuzzy finder with optional case-insensitive matching.
@@ -98,9 +95,9 @@ class TextUtils(object):
         """
         suggestions = []
         if case_sensitive:
-            pat = '.*?'.join(map(re.escape, text))
+            pat = ".*?".join(map(re.escape, text))
         else:
-            pat = '.*?'.join(map(re.escape, text.lower()))
+            pat = ".*?".join(map(re.escape, text.lower()))
         regex = re.compile(pat)
         for item in collection:
             if case_sensitive:
@@ -128,12 +125,10 @@ class TextUtils(object):
         """
         word = word.lower()
         if fuzzy:
-            for suggestion in self._fuzzy_finder(word,
-                                                 collection,
-                                                 case_sensitive=False):
-                yield Completion(suggestion,
-                                 -len(word),
-                                 display_meta='display_meta')
+            for suggestion in self._fuzzy_finder(
+                word, collection, case_sensitive=False
+            ):
+                yield Completion(suggestion, -len(word), display_meta="display_meta")
         else:
             for name in sorted(collection):
                 if name.lower().startswith(word) or not word:
@@ -141,10 +136,9 @@ class TextUtils(object):
                     display_meta = None
                     if name in META_LOOKUP:
                         display_meta = META_LOOKUP[name]
-                    yield Completion(name,
-                                     -len(word),
-                                     display=display,
-                                     display_meta=display_meta)
+                    yield Completion(
+                        name, -len(word), display=display, display_meta=display_meta
+                    )
 
     def _shlex_split(self, text):
         """Wrapper for shlex.

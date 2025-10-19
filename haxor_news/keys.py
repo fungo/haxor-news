@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Copyright 2015 Donne Martin. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
@@ -16,7 +14,7 @@
 from prompt_toolkit.key_binding import KeyBindings
 
 
-class KeyManager(object):
+class KeyManager:
     """Custom key bindings for haxor-news.
 
     Handles:
@@ -44,7 +42,7 @@ class KeyManager(object):
         assert callable(set_paginate_comments)
         assert callable(get_paginate_comments)
 
-        @self.bindings.add('f2')
+        @self.bindings.add("f2")
         def handle_f2(event):
             """Enable/Disable paginate comments mode.
 
@@ -56,7 +54,7 @@ class KeyManager(object):
             # set_paginate_comments(not get_paginate_comments())
             pass
 
-        @self.bindings.add('f10')
+        @self.bindings.add("f10")
         def handle_f10(event):
             """Quit when F10 is pressed.
 
@@ -65,7 +63,7 @@ class KeyManager(object):
             """
             event.app.exit()
 
-        @self.bindings.add('c-space')
+        @self.bindings.add("c-space")
         def handle_ctrl_space(event):
             """Initialize autocompletion at the cursor.
 

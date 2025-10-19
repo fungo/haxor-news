@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Copyright 2015 Donne Martin. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
@@ -14,15 +12,15 @@
 # language governing permissions and limitations under the License.
 
 
-import mock
-from tests.compat import unittest
+from unittest import mock
 
 from prompt_toolkit.keys import Keys
+
 from haxor_news.haxor import Haxor
+from tests.compat import unittest
 
 
 class KeysTest(unittest.TestCase):
-
     def setUp(self):
         self.haxor = Haxor()
         self.bindings = self.haxor.key_manager.bindings

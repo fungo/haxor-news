@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Copyright 2015 Donne Martin. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
@@ -42,7 +40,7 @@ def pretty_date_time(date_time):
     second_diff = diff.seconds
     day_diff = diff.days
     if day_diff < 0:
-        return ''
+        return ""
     if day_diff == 0:
         if second_diff < 10:
             return "just now"

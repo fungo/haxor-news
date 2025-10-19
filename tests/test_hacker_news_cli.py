@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Copyright 2015 Donne Martin. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
@@ -14,106 +12,102 @@
 # language governing permissions and limitations under the License.
 
 
-import mock
-from tests.compat import unittest
+from unittest import mock
 
 from click.testing import CliRunner
 
 from haxor_news.hacker_news_cli import HackerNewsCli
+from tests.compat import unittest
 
 
 class HackerNewsCliTest(unittest.TestCase):
-
     def setUp(self):
         self.runner = CliRunner()
         self.hacker_news_cli = HackerNewsCli()
         self.limit = 10
-        self.user = 'foo'
-        self.dummy = 'foo'
+        self.user = "foo"
+        self.dummy = "foo"
 
     def test_cli_no_args(self):
         # In click 8.x, invoking a group without a command returns exit code 2
         # (UsageError: missing command)
         result = self.runner.invoke(HackerNewsCli.cli)
         assert result.exit_code == 2
-        assert 'Usage:' in result.output
+        assert "Usage:" in result.output
 
     def test_cli_help(self):
         # Test that --help works and returns exit code 0
-        result = self.runner.invoke(HackerNewsCli.cli, ['--help'])
+        result = self.runner.invoke(HackerNewsCli.cli, ["--help"])
         assert result.exit_code == 0
-        assert 'Usage:' in result.output
-        assert 'Commands:' in result.output
+        assert "Usage:" in result.output
+        assert "Commands:" in result.output
 
-    @mock.patch('haxor_news.hacker_news_cli.HackerNews.ask')
+    @mock.patch("haxor_news.hacker_news_cli.HackerNews.ask")
     def test_ask(self, mock_hn_call):
-        result = self.runner.invoke(HackerNewsCli.cli, ['ask'])
+        result = self.runner.invoke(HackerNewsCli.cli, ["ask"])
         mock_hn_call.assert_called_with(self.limit)
         assert result.exit_code == 0
 
-    @mock.patch('haxor_news.hacker_news_cli.HackerNews.best')
+    @mock.patch("haxor_news.hacker_news_cli.HackerNews.best")
     def test_best(self, mock_hn_call):
-        result = self.runner.invoke(HackerNewsCli.cli, ['best'])
+        result = self.runner.invoke(HackerNewsCli.cli, ["best"])
         mock_hn_call.assert_called_with(self.limit)
         assert result.exit_code == 0
 
-    @mock.patch('haxor_news.hacker_news_cli.HackerNews.hiring_and_freelance')
+    @mock.patch("haxor_news.hacker_news_cli.HackerNews.hiring_and_freelance")
     def test_hiring(self, mock_hn_call):
-        result = self.runner.invoke(
-            HackerNewsCli.cli, ['hiring', self.dummy, '-i', 1])
+        result = self.runner.invoke(HackerNewsCli.cli, ["hiring", self.dummy, "-i", 1])
         mock_hn_call.assert_called_with(self.dummy, 1)
         assert result.exit_code == 0
 
-    @mock.patch('haxor_news.hacker_news_cli.HackerNews.hiring_and_freelance')
+    @mock.patch("haxor_news.hacker_news_cli.HackerNews.hiring_and_freelance")
     def test_freelance(self, mock_hn_call):
         result = self.runner.invoke(
-            HackerNewsCli.cli, ['freelance', self.dummy, '-i', 1])
+            HackerNewsCli.cli, ["freelance", self.dummy, "-i", 1]
+        )
         mock_hn_call.assert_called_with(self.dummy, 1)
         assert result.exit_code == 0
 
-    @mock.patch('haxor_news.hacker_news_cli.HackerNews.jobs')
+    @mock.patch("haxor_news.hacker_news_cli.HackerNews.jobs")
     def test_jobs(self, mock_hn_call):
-        result = self.runner.invoke(HackerNewsCli.cli, ['jobs'])
+        result = self.runner.invoke(HackerNewsCli.cli, ["jobs"])
         mock_hn_call.assert_called_with(self.limit)
         assert result.exit_code == 0
 
-    @mock.patch('haxor_news.hacker_news_cli.HackerNews.new')
+    @mock.patch("haxor_news.hacker_news_cli.HackerNews.new")
     def test_new(self, mock_hn_call):
-        result = self.runner.invoke(HackerNewsCli.cli, ['new'])
+        result = self.runner.invoke(HackerNewsCli.cli, ["new"])
         mock_hn_call.assert_called_with(self.limit)
         assert result.exit_code == 0
 
-    @mock.patch('haxor_news.hacker_news_cli.HackerNews.onion')
+    @mock.patch("haxor_news.hacker_news_cli.HackerNews.onion")
     def test_onion(self, mock_hn_call):
-        result = self.runner.invoke(
-            HackerNewsCli.cli, ['onion', str(self.limit)])
+        result = self.runner.invoke(HackerNewsCli.cli, ["onion", str(self.limit)])
         mock_hn_call.assert_called_with(self.limit)
         assert result.exit_code == 0
 
-    @mock.patch('haxor_news.hacker_news_cli.HackerNews.show')
+    @mock.patch("haxor_news.hacker_news_cli.HackerNews.show")
     def test_show(self, mock_hn_call):
-        result = self.runner.invoke(HackerNewsCli.cli, ['show'])
+        result = self.runner.invoke(HackerNewsCli.cli, ["show"])
         mock_hn_call.assert_called_with(self.limit)
         assert result.exit_code == 0
 
-    @mock.patch('haxor_news.hacker_news_cli.HackerNews.top')
+    @mock.patch("haxor_news.hacker_news_cli.HackerNews.top")
     def test_top(self, mock_hn_call):
-        result = self.runner.invoke(HackerNewsCli.cli, ['top'])
+        result = self.runner.invoke(HackerNewsCli.cli, ["top"])
         mock_hn_call.assert_called_with(self.limit)
         assert result.exit_code == 0
 
-    @mock.patch('haxor_news.hacker_news_cli.HackerNews.user')
+    @mock.patch("haxor_news.hacker_news_cli.HackerNews.user")
     def test_user(self, mock_hn_call):
-        result = self.runner.invoke(
-            HackerNewsCli.cli, ['user', self.user])
+        result = self.runner.invoke(HackerNewsCli.cli, ["user", self.user])
         mock_hn_call.assert_called_with(self.user, self.limit)
         assert result.exit_code == 0
 
-    @mock.patch('haxor_news.hacker_news_cli.HackerNews.view')
+    @mock.patch("haxor_news.hacker_news_cli.HackerNews.view")
     def test_view(self, mock_hn_call):
         dummy = False
-        index = '0'
-        result = self.runner.invoke(
-            HackerNewsCli.cli, ['view', index])
+        index = "0"
+        result = self.runner.invoke(HackerNewsCli.cli, ["view", index])
         mock_hn_call.assert_called_with(int(index), None, dummy, dummy, dummy)
         assert result.exit_code == 0

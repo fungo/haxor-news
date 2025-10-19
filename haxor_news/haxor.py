@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Copyright 2015 Donne Martin. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
@@ -17,12 +15,11 @@
 import os
 import platform
 import subprocess
-import sys
 
 import click
 from prompt_toolkit import PromptSession
-from prompt_toolkit.history import FileHistory
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
+from prompt_toolkit.history import FileHistory
 
 from .__init__ import __version__
 from .completer import Completer
@@ -33,7 +30,7 @@ from .toolbar import Toolbar
 from .utils import TextUtils
 
 
-class Haxor(object):
+class Haxor:
     """Encapsulate the Hacker News CLI.
 
     :type session: :class:`prompt_toolkit.PromptSession`
@@ -71,40 +68,39 @@ class Haxor(object):
     """
 
     CMDS_NO_PAGINATE = [
-        '-b',
-        '--browser',
-        '>',
-        '<',
+        "-b",
+        "--browser",
+        ">",
+        "<",
     ]
     CMDS_ENABLE_PAGINATE = [
-        '-cq',
-        '--comments_regex_query',
-        '-c',
-        '--comments',
-        '-cr',
-        '--comments_recent',
-        '-cu',
-        '--comments_unseen',
-        '-ch',
-        '--comments_hide_non_matching',
-        'hiring',
-        'freelance',
+        "-cq",
+        "--comments_regex_query",
+        "-c",
+        "--comments",
+        "-cr",
+        "--comments_recent",
+        "-cu",
+        "--comments_unseen",
+        "-ch",
+        "--comments_hide_non_matching",
+        "hiring",
+        "freelance",
     ]
-    PAGINATE_CMD = ' | less -r'
-    PAGINATE_CMD_WIN = ' | more'
+    PAGINATE_CMD = " | less -r"
+    PAGINATE_CMD_WIN = " | more"
 
     def __init__(self):
         self.session = None
         self.key_manager = None
-        self.theme = 'vim'
+        self.theme = "vim"
         self.paginate_comments = True
         self.hacker_news_cli = HackerNewsCli()
         self.text_utils = TextUtils()
-        self.completer = Completer(fuzzy_match=False,
-                                   text_utils=self.text_utils)
+        self.completer = Completer(fuzzy_match=False, text_utils=self.text_utils)
         self._create_cli()
-        if platform.system() == 'Windows':
-            self.CMDS_ENABLE_PAGINATE.append('view')
+        if platform.system() == "Windows":
+            self.CMDS_ENABLE_PAGINATE.append("view")
 
     def _create_key_manager(self):
         """Create the :class:`KeyManager`.
@@ -125,18 +121,17 @@ class Haxor(object):
             """
             self.paginate_comments = paginate_comments
 
-        return KeyManager(
-            set_paginate_comments, lambda: self.paginate_comments)
+        return KeyManager(set_paginate_comments, lambda: self.paginate_comments)
 
     def _create_cli(self):
         """Create the prompt_toolkit PromptSession."""
-        history = FileHistory(os.path.expanduser('~/.haxornewshistory'))
+        history = FileHistory(os.path.expanduser("~/.haxornewshistory"))
         toolbar = Toolbar(lambda: self.paginate_comments)
         self.key_manager = self._create_key_manager()
         style_factory = StyleFactory(self.theme)
 
         self.session = PromptSession(
-            message='haxor> ',
+            message="haxor> ",
             completer=self.completer,
             history=history,
             auto_suggest=AutoSuggestFromHistory(),
@@ -162,7 +157,7 @@ class Haxor(object):
         """
         if not any(sub in document_text for sub in self.CMDS_NO_PAGINATE):
             if any(sub in document_text for sub in self.CMDS_ENABLE_PAGINATE):
-                if platform.system() == 'Windows':
+                if platform.system() == "Windows":
                     document_text += self.PAGINATE_CMD_WIN
                 else:
                     document_text += self.PAGINATE_CMD
@@ -177,7 +172,7 @@ class Haxor(object):
         :rtype: bool
         :return: True if should exit, False otherwise.
         """
-        return text.strip() in ('exit', 'quit')
+        return text.strip() in ("exit", "quit")
 
     def run_command(self, text):
         """Run the given command.
@@ -190,12 +185,12 @@ class Haxor(object):
                 text = self._add_comment_pagination(text)
             subprocess.call(text, shell=True)
         except Exception as e:
-            click.secho(str(e), fg='red')
+            click.secho(str(e), fg="red")
 
     def run_cli(self):
         """Run the main REPL loop."""
-        click.echo('Version: ' + __version__)
-        click.echo('Syntax: hn <command> [params] [options]')
+        click.echo("Version: " + __version__)
+        click.echo("Syntax: hn <command> [params] [options]")
 
         while True:
             try:
@@ -211,4 +206,4 @@ class Haxor(object):
             except EOFError:
                 break
             except Exception as e:
-                click.secho(f'Error: {e}', fg='red')
+                click.secho(f"Error: {e}", fg="red")

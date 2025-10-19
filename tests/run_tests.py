@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 # Copyright 2015 Donne Martin. All Rights Reserved.
 #
@@ -14,15 +13,16 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-from tests.compat import unittest
-
 from test_completer import CompleterTest  # NOQA
+from test_config import ConfigTest  # NOQA
 from test_hacker_news import HackerNewsTest  # NOQA
 from test_hacker_news_cli import HackerNewsCliTest  # NOQA
 from test_haxor import HaxorTest  # NOQA
 from test_keys import KeysTest  # NOQA
 from test_toolbar import ToolbarTest  # NOQA
-from test_config import ConfigTest  # NOQA
+
+from tests.compat import unittest
+
 # from test_config_integration import ConfigTestIntegration  # NOQA
 try:
     from test_cli import CliTest  # NOQA
@@ -31,5 +31,5 @@ except:
     pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
