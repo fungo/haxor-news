@@ -349,7 +349,7 @@ class HackerNews(object):
         formatted_item += click.style(submission_time + ' ',
                                       fg=self.config.clr_time)
         num_comments = str(item.descendants) if item.descendants else '0'
-        formatted_item += click.style('| ' + num_comments + ' comments',
+        formatted_item += click.style('| ' + num_comments + ' comments (' + str(item.item_id) + ')',
                                       fg=self.config.clr_num_comments)
         return formatted_item
 
