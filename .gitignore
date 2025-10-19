@@ -59,3 +59,6 @@ target/
 scratch/
 PYTHON313_UPGRADE_PLAN.md
 UV_DEV_SETUP.md
+
+# Claude Code
+.claude/settings.local.json
