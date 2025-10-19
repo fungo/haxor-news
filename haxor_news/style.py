@@ -15,7 +15,7 @@
 
 from pygments.token import Token
 from pygments.util import ClassNotFound
-from prompt_toolkit.styles import default_style_extensions, style_from_dict
+from prompt_toolkit.styles import Style
 import pygments.styles
 
 
@@ -48,7 +48,6 @@ class StyleFactory(object):
         # Create styles dictionary.
         styles = {}
         styles.update(style.styles)
-        styles.update(default_style_extensions)
         styles.update({
             Token.Menu.Completions.Completion.Current: 'bg:#00aaaa #000000',
             Token.Menu.Completions.Completion: 'bg:#008888 #ffffff',
@@ -68,4 +67,4 @@ class StyleFactory(object):
             Token.Toolbar.Arg.Text: 'nobold'
         })
 
-        return style_from_dict(styles)
+        return Style.from_dict(styles)

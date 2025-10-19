@@ -13,74 +13,59 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-from prompt_toolkit.key_binding.manager import KeyBindingManager
-from prompt_toolkit.keys import Keys
+from prompt_toolkit.key_binding import KeyBindings
 
 
 class KeyManager(object):
-    """A custom :class:`prompt_toolkit.KeyBindingManager`.
+    """Custom key bindings for haxor-news.
 
-    Handle togging of:
-        * Comment pagination.
+    Handles:
+        * F10: Exit application
+        * Ctrl+Space: Toggle completion menu
+        * F2: Toggle comment pagination (disabled)
 
-    :type manager: :class:`prompt_toolkit.key_binding.manager.
-        KeyBindingManager`
-    :param manager: An instance of `prompt_toolkit.key_binding.manager.
-        KeyBindingManager`.
+    :type bindings: :class:`prompt_toolkit.key_binding.KeyBindings`
+    :param bindings: An instance of KeyBindings.
     """
 
     def __init__(self, set_paginate_comments, get_paginate_comments):
-        self.manager = None
-        self._create_key_manager(set_paginate_comments, get_paginate_comments)
+        self.bindings = KeyBindings()
+        self._create_key_bindings(set_paginate_comments, get_paginate_comments)
 
-    def _create_key_manager(self, set_paginate_comments, get_paginate_comments):
-        """Create and initialize the keybinding manager.
+    def _create_key_bindings(self, set_paginate_comments, get_paginate_comments):
+        """Create and initialize key bindings.
 
         :type set_paginate_comments: callable
         :param set_paginate_comments: Sets the paginate comments config.
 
         :type get_paginate_comments: callable
         :param get_paginate_comments: Gets the paginate comments config.
-
-        :rtype: :class:`prompt_toolkit.key_binding.manager.
-            KeyBindingManager`
-        :return: An instance of `prompt_toolkit.key_binding.manager.
-            KeyBindingManager`.
         """
         assert callable(set_paginate_comments)
         assert callable(get_paginate_comments)
-        self.manager = KeyBindingManager(
-            enable_search=True,
-            enable_abort_and_exit_bindings=True,
-            enable_system_bindings=True,
-            enable_auto_suggest_bindings=True)
 
-        @self.manager.registry.add_binding(Keys.F2)
-        def handle_f2(_):
+        @self.bindings.add('f2')
+        def handle_f2(event):
             """Enable/Disable paginate comments mode.
 
             This method is currently disabled.
 
-            :type _: :class:`prompt_toolkit.Event`
-            :param _: (Unused)
-
-            :raises: :class:`EOFError` to quit the app.
+            :type event: :class:`prompt_toolkit.key_processor.KeyPressEvent`
+            :param event: Key press event.
             """
             # set_paginate_comments(not get_paginate_comments())
             pass
 
-        @self.manager.registry.add_binding(Keys.F10)
-        def handle_f10(_):
-            """Quit when the `F10` key is pressed.
+        @self.bindings.add('f10')
+        def handle_f10(event):
+            """Quit when F10 is pressed.
 
-            :type _: :class:`prompt_toolkit.Event`
-            :param _: (Unused)
-
-            :raises: :class:`EOFError` to quit the app.
+            :type event: :class:`prompt_toolkit.key_processor.KeyPressEvent`
+            :param event: Key press event.
             """
-            raise EOFError
+            event.app.exit()
 
-        @self.manager.registry.add_binding(Keys.ControlSpace)
+        @self.bindings.add('c-space')
         def handle_ctrl_space(event):
             """Initialize autocompletion at the cursor.
 
@@ -89,11 +74,11 @@ class KeyManager(object):
 
             If the menu is showing, select the next completion.
 
-            :type event: :class:`prompt_toolkit.Event`
-            :param event: An instance of `prompt_toolkit.Event`.
+            :type event: :class:`prompt_toolkit.key_processor.KeyPressEvent`
+            :param event: Key press event.
             """
-            b = event.cli.current_buffer
-            if b.complete_state:
-                b.complete_next()
+            buff = event.app.current_buffer
+            if buff.complete_state:
+                buff.complete_next()
             else:
-                event.cli.start_completion(select_first=False)
+                buff.start_completion(select_first=False)
