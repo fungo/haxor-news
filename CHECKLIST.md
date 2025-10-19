@@ -3,15 +3,10 @@ Release Checklist
 
 A. Install in a new venv and run unit tests
 
-Note, you can't seem to script the virtualenv calls, see:
-https://bitbucket.org/dhellmann/virtualenvwrapper/issues/219/cant-deactivate-active-virtualenv-from
-
-    $ deactivate
-    $ rmvirtualenv haxor-news
-    $ mkvirtualenv haxor-news
-    $ pip install -e .
-    $ pip install -r requirements-dev.txt
-    $ rm -rf .tox && tox
+    $ python -m venv venv
+    $ source venv/bin/activate
+    $ pip install -e '.[test,dev]'
+    $ pytest
 
 B. Run code checks
 
@@ -25,7 +20,7 @@ D. Update and review `README.rst` and `Sphinx` docs, then check haxor-news/docs/
 
 E. Push changes
 
-F. Review Travis, Codecov, and Gemnasium
+F. Review GitHub Actions
 
 G. Start a new release branch
 
@@ -77,9 +72,9 @@ T. Install in a new venv and run manual [smoke tests](#smoke-tests) on Mac, Ubun
 
 ## Smoke Tests
 
-Run the following on Python 2.7 and Python 3.4:
+Run the following on Python 3.10 and Python 3.13:
 
-* Craete a new `virtualenv`
-* Pip install `haxor-news` into new `virtualenv`
+* Create a new virtualenv
+* Pip install `haxor-news` into new virtualenv
 * Run `haxor-news`
 * Run targeted tests based on recent code changes

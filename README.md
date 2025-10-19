@@ -400,16 +400,15 @@ For these versions, please use haxor-news v0.4.2.
 If you're interested in contributing to `haxor-news`, run the following commands:
 
     $ git clone https://github.com/donnemartin/haxor-news.git
-    $ pip install -e .
-    $ pip install -r requirements-dev.txt
+    $ pip install -e '.[test,dev]'
     $ haxor-news
     $ hn <command> [params] [options]
 
 ### Continuous Integration
 
-[![Build Status](https://travis-ci.org/donnemartin/haxor-news.svg?branch=master)](https://travis-ci.org/donnemartin/haxor-news)
+[![Build Status](https://github.com/donnemartin/haxor-news/workflows/Test/badge.svg)](https://github.com/donnemartin/haxor-news/actions)
 
-Continuous integration details are available on [Travis CI](https://travis-ci.org/donnemartin/haxor-news).
+Continuous integration runs on [GitHub Actions](https://github.com/donnemartin/haxor-news/actions).
 
 ### Unit Tests and Code Coverage
 
