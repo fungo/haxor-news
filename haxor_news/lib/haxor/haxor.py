@@ -27,8 +27,6 @@ Unofficial Python wrapper for official Hacker News API
 @email hi@avi.im
 """
 
-from __future__ import absolute_import
-from __future__ import unicode_literals
 import datetime
 import json
 import sys

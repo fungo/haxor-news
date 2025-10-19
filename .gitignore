@@ -56,4 +56,5 @@ docs/_build/
 target/
 
 # Misc
-scratch/
+scratch/PYTHON313_UPGRADE_PLAN.md
+UV_DEV_SETUP.md

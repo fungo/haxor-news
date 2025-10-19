@@ -13,12 +13,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-from __future__ import unicode_literals
-from __future__ import print_function
 
 import re
-
-import six
 import shlex
 from prompt_toolkit.completion import Completion
 
@@ -151,7 +147,7 @@ class TextUtils(object):
                                      display_meta=display_meta)
 
     def _shlex_split(self, text):
-        """Wrapper for shlex, because it does not seem to handle unicode in 2.6.
+        """Wrapper for shlex.
 
         :type text: str
         :param text: A string to split.
@@ -159,8 +155,6 @@ class TextUtils(object):
         :rtype: list
         :return: A list that contains words for each split element of text.
         """
-        if six.PY2:
-            text = text.encode('utf-8')
         return shlex.split(text)
 
     def _safe_split(self, text):
