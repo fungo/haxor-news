@@ -12,10 +12,10 @@
 # language governing permissions and limitations under the License.
 
 
+import unittest
 from unittest import mock
 
 from haxor_news.hacker_news import HackerNews
-from tests.compat import unittest
 from tests.data.comment import formatted_comment, formatted_heading, raw_comment
 from tests.data.item import formatted_items
 from tests.data.markdown import formatted_markdown, raw_markdown

@@ -11,12 +11,12 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+import html as HTMLParser
 import re
 
 import click
 import requests
 
-from .compat import HTMLParser
 from .lib.html2text.html2text import HTML2Text
 
 

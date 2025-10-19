@@ -12,10 +12,9 @@
 # language governing permissions and limitations under the License.
 
 import importlib.metadata
+import unittest
 
 import pexpect
-
-from tests.compat import unittest
 
 
 class CliTest(unittest.TestCase):

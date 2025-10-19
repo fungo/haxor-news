@@ -13,10 +13,10 @@
 
 
 import os
+import unittest
 from unittest import mock
 
 from haxor_news.hacker_news import HackerNews
-from tests.compat import unittest
 from tests.mock_hacker_news_api import MockHackerNewsApi
 
 

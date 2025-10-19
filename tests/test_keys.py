@@ -12,12 +12,12 @@
 # language governing permissions and limitations under the License.
 
 
+import unittest
 from unittest import mock
 
 from prompt_toolkit.keys import Keys
 
 from haxor_news.haxor import Haxor
-from tests.compat import unittest
 
 
 class KeysTest(unittest.TestCase):
