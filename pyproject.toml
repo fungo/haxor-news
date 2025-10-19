@@ -28,6 +28,7 @@ dependencies = [
     "requests>=2.31.0,<3.0.0",
     "pygments>=2.17.0",
     "prompt-toolkit>=3.0.52",
+    "html2text>=2020.1.16",
 ]
 
 [project.urls]
@@ -45,7 +46,6 @@ test = [
     "pytest>=7.0.0",
     "pytest-cov>=4.0.0",
     "mock>=1.0.1",
-    "html2text",
     "pexpect>=4.8.0",
 ]
 dev = [
@@ -117,7 +117,6 @@ exclude = '''
 target-version = "py310"
 line-length = 88
 exclude = [
-    "haxor_news/lib/html2text",
     "haxor_news/lib/haxor",
 ]
 
@@ -140,7 +139,6 @@ ignore = [
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]
 "tests/*" = ["B011"]
-"haxor_news/lib/html2text/*" = ["E", "F", "B", "I", "C4", "UP"]
 "haxor_news/lib/haxor/*" = ["E", "F", "B", "I", "C4", "UP"]
 
 [tool.mypy]

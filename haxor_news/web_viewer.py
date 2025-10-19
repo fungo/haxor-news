@@ -16,8 +16,7 @@ import re
 
 import click
 import requests
-
-from .lib.html2text.html2text import HTML2Text
+from html2text import HTML2Text
 
 
 class WebViewer:
