@@ -12,14 +12,15 @@
 # language governing permissions and limitations under the License.
 
 
+import html as HTMLParser
 import platform
 import re
 import sys
 import webbrowser
+from urllib.parse import urlparse
 
 import click
 
-from .compat import HTMLParser, urlparse
 from .config import Config
 from .lib.haxor.haxor import HackerNewsApi, HTTPError, InvalidItemID, InvalidUserID
 from .lib.pretty_date_time import pretty_date_time

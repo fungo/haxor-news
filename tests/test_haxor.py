@@ -13,10 +13,10 @@
 
 
 import platform
+import unittest
 from unittest import mock
 
 from haxor_news.haxor import Haxor
-from tests.compat import unittest
 
 
 class HaxorTest(unittest.TestCase):

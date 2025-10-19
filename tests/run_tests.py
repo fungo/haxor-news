@@ -21,7 +21,7 @@ from test_haxor import HaxorTest  # NOQA
 from test_keys import KeysTest  # NOQA
 from test_toolbar import ToolbarTest  # NOQA
 
-from tests.compat import unittest
+import unittest
 
 # from test_config_integration import ConfigTestIntegration  # NOQA
 try:

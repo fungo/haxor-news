@@ -13,11 +13,11 @@
 
 
 import os
+import unittest
 from unittest import mock
 
 from haxor_news.hacker_news import HackerNews
 from haxor_news.settings import freelancer_post_id, who_is_hiring_post_id
-from tests.compat import unittest
 from tests.mock_hacker_news_api import MockHackerNewsApi
 
 

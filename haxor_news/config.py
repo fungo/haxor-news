@@ -12,11 +12,13 @@
 # language governing permissions and limitations under the License.
 
 
+import configparser
 import os
+from urllib.error import URLError
+from urllib.request import urlretrieve
 
 import click
 
-from .compat import URLError, configparser, urlretrieve
 from .settings import freelancer_post_id, who_is_hiring_post_id
 
 

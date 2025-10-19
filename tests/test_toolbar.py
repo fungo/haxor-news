@@ -12,9 +12,10 @@
 # language governing permissions and limitations under the License.
 
 
+import unittest
+
 from haxor_news.haxor import Haxor
 from haxor_news.toolbar import Toolbar
-from tests.compat import unittest
 
 
 class ToolbarTest(unittest.TestCase):

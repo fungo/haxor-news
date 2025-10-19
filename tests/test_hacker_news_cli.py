@@ -12,12 +12,12 @@
 # language governing permissions and limitations under the License.
 
 
+import unittest
 from unittest import mock
 
 from click.testing import CliRunner
 
 from haxor_news.hacker_news_cli import HackerNewsCli
-from tests.compat import unittest
 
 
 class HackerNewsCliTest(unittest.TestCase):

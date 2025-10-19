@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 
+import unittest
 from unittest import mock
 
 from prompt_toolkit.document import Document
@@ -19,7 +20,6 @@ from prompt_toolkit.document import Document
 from haxor_news.completer import Completer
 from haxor_news.settings import freelancer_post_id, who_is_hiring_post_id
 from haxor_news.utils import TextUtils
-from tests.compat import unittest
 
 
 class CompleterTest(unittest.TestCase):
