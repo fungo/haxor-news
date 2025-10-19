@@ -378,13 +378,13 @@ There is a known issue with Apple and its included python package dependencies (
 
 ### Supported Python Versions
 
-* Python 2.6
-* Python 2.7
-* Python 3.3
-* Python 3.4
-* Python 3.5
-* Python 3.6
-* Python 3.7
+* Python 3.10
+* Python 3.11
+* Python 3.12
+* Python 3.13
+
+**Note:** Python 2.x and Python 3.9 and earlier are no longer supported.
+For these versions, please use haxor-news v0.4.2.
 
 ### Supported Platforms
 

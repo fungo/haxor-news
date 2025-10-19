@@ -18,6 +18,40 @@ https://github.com/donnemartin/haxor-news/issues
 Changelog
 =========
 
+0.5.0 (2025-10-19)
+------------------
+
+### BREAKING CHANGES
+
+* Dropped support for Python 2.x and Python 3.9 and earlier
+* Minimum required Python version is now 3.10
+
+### Features
+
+* Add support for Python 3.10, 3.11, 3.12, and 3.13
+
+### Updates
+
+* Upgrade prompt-toolkit from 1.x to 3.x (major rewrite of REPL interface)
+* Upgrade click from 5.x/7.x to 8.x
+* Upgrade all dependencies to latest stable versions:
+  - colorama >= 0.4.6
+  - requests >= 2.31.0
+  - pygments >= 2.17.0
+* Remove `six` dependency
+* Remove all `__future__` imports
+* Modernize codebase for Python 3 only
+* Update test suite for Python 3.13 and new dependency APIs
+
+### Technical Details
+
+* Migrate from `CommandLineInterface` to `PromptSession` (prompt-toolkit 3.x)
+* Rewrite key bindings using new `KeyBindings` API
+* Update completer for prompt-toolkit 3.x  API changes
+* Simplify toolbar to return plain strings instead of Token tuples
+* Update style handling for prompt-toolkit 3.x compatibility
+* Fix all tests for prompt-toolkit 3.x and click 8.x
+
 0.4.2 (2017-04-08)
 ------------------
 
