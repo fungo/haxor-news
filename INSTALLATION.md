@@ -1,6 +1,29 @@
 Installation
 ============
 
+## Recommended: Using uv (Faster)
+
+For faster installation and better dependency management, we recommend using [uv](https://docs.astral.sh/uv/):
+
+```bash
+# Install uv if you haven't already
+curl -LsSf https://astral.sh/uv/install.sh | sh
+# or: pip install uv
+
+# Create a virtual environment with Python 3.13
+uv venv --python 3.13 .venv
+source .venv/bin/activate
+
+# Install haxor-news
+uv pip install haxor-news
+```
+
+**Why uv?**
+- 10-100x faster than pip
+- Better dependency resolution
+- Simplified environment management
+- Fully compatible with pip and standard Python packaging
+
 ### Pip Installation
 
 [![PyPI version](https://badge.fury.io/py/haxor-news.svg)](http://badge.fury.io/py/haxor-news) [![PyPI](https://img.shields.io/pypi/pyversions/haxor-news.svg)](https://pypi.python.org/pypi/haxor-news/)
@@ -47,12 +70,6 @@ If you want to activate the `haxor-news` `virtualenv` again later, run:
 
     workon haxor-news
 
-## Mac OS X 10.11 El Capitan Users
-
-There is a known issue with Apple and its included python package dependencies (more info at https://github.com/pypa/pip/issues/3165). We are investigating ways to fix this issue but in the meantime, to install haxor-news, you can run:
-
-    $ sudo pip install haxor-news --upgrade --ignore-installed six
-  
 ## Nix/NixOS installation
 
 Nix is a package manager default to the NixOS distribution, but it can also be used on any Linux distribution. In order to install `haxor-news` with it run:
