@@ -37,11 +37,8 @@ class Toolbar(object):
         """
         assert callable(paginate_comments_cfg)
 
-        def get_toolbar_items(_):
+        def get_toolbar_items():
             """Return the toolbar items.
-
-            :type _: :class:`prompt_toolkit.Cli`
-            :param _: (Unused)
 
             :rtype: list
             :return: A list of (pygments.Token.Toolbar, str).

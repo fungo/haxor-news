@@ -150,14 +150,14 @@ class Completer(Completer):
                 return [ARGS_OPTS_LOOKUP[subcommand]['args']]
         return ['10']
 
-    def get_completions(self, document, _):
+    def get_completions(self, document, complete_event):
         """Get completions for the current scope.
 
         :type document: :class:`prompt_toolkit.Document`
         :param document: An instance of `prompt_toolkit.Document`.
 
-        :type _: :class:`prompt_toolkit.completion.Completion`
-        :param _: (Unused).
+        :type complete_event: :class:`prompt_toolkit.completion.CompleteEvent`
+        :param complete_event: Completion event (unused but required by API).
 
         :rtype: generator
         :return: Yields an instance of `prompt_toolkit.completion.Completion`.

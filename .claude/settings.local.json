@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(source .venv/bin/activate)",
+      "Bash(uv pip uninstall:*)",
+      "Bash(uv pip install:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
