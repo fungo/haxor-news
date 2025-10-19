@@ -38,21 +38,16 @@ class Toolbar(object):
         assert callable(paginate_comments_cfg)
 
         def get_toolbar_items():
-            """Return the toolbar items.
+            """Return the toolbar text.
 
-            :rtype: list
-            :return: A list of (pygments.Token.Toolbar, str).
+            :rtype: str
+            :return: The toolbar text.
             """
             # if paginate_comments_cfg():
-            #     paginate_comments_token = Token.Toolbar.On
             #     paginate_comments = 'ON'
             # else:
-            #     paginate_comments_token = Token.Toolbar.Off
             #     paginate_comments = 'OFF'
-            return [
-                # (paginate_comments_token,
-                #  ' [F2] Paginate Comments: {0} '.format(paginate_comments)),
-                (Token.Toolbar, ' [F10] Exit ')
-            ]
+            # return ' [F2] Paginate Comments: {0}  [F10] Exit '.format(paginate_comments)
+            return ' [F10] Exit '
 
         return get_toolbar_items

@@ -41,30 +41,21 @@ class StyleFactory(object):
         :return: An instance of `pygments.style.StyleMeta`.
         """
         try:
-            style = pygments.styles.get_style_by_name(name)
+            pygments_style = pygments.styles.get_style_by_name(name)
         except ClassNotFound:
-            style = pygments.styles.get_style_by_name('native')
+            pygments_style = pygments.styles.get_style_by_name('native')
 
         # Create styles dictionary.
-        styles = {}
-        styles.update(style.styles)
-        styles.update({
-            Token.Menu.Completions.Completion.Current: 'bg:#00aaaa #000000',
-            Token.Menu.Completions.Completion: 'bg:#008888 #ffffff',
-            Token.Menu.Completions.Meta.Current: 'bg:#00aaaa #000000',
-            Token.Menu.Completions.Meta: 'bg:#00aaaa #ffffff',
-            Token.Menu.Completions.ProgressButton: 'bg:#003333',
-            Token.Menu.Completions.ProgressBar: 'bg:#00aaaa',
-            Token.Scrollbar: 'bg:#00aaaa',
-            Token.Scrollbar.Button: 'bg:#003333',
-            Token.Toolbar: 'bg:#222222 #cccccc',
-            Token.Toolbar.Off: 'bg:#222222 #696969',
-            Token.Toolbar.On: 'bg:#222222 #ffffff',
-            Token.Toolbar.Search: 'noinherit bold',
-            Token.Toolbar.Search.Text: 'nobold',
-            Token.Toolbar.System: 'noinherit bold',
-            Token.Toolbar.Arg: 'noinherit bold',
-            Token.Toolbar.Arg.Text: 'nobold'
-        })
+        # In prompt-toolkit 3.x, Style.from_dict expects string keys
+        # We use pygments_style as base but only add our custom UI styles
+        styles = {
+            'completion-menu.completion.current': 'bg:#00aaaa #000000',
+            'completion-menu.completion': 'bg:#008888 #ffffff',
+            'completion-menu.meta.completion.current': 'bg:#00aaaa #000000',
+            'completion-menu.meta.completion': 'bg:#00aaaa #ffffff',
+            'scrollbar.background': 'bg:#00aaaa',
+            'scrollbar.button': 'bg:#003333',
+            'bottom-toolbar': 'bg:#222222 #cccccc',
+        }
 
         return Style.from_dict(styles)
