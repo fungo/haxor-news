@@ -31,71 +31,81 @@ class HackerNewsCliTest(unittest.TestCase):
         self.user = 'foo'
         self.dummy = 'foo'
 
-    def test_cli(self):
-        result = self.runner.invoke(self.hacker_news_cli.cli)
+    def test_cli_no_args(self):
+        # In click 8.x, invoking a group without a command returns exit code 2
+        # (UsageError: missing command)
+        result = self.runner.invoke(HackerNewsCli.cli)
+        assert result.exit_code == 2
+        assert 'Usage:' in result.output
+
+    def test_cli_help(self):
+        # Test that --help works and returns exit code 0
+        result = self.runner.invoke(HackerNewsCli.cli, ['--help'])
         assert result.exit_code == 0
+        assert 'Usage:' in result.output
+        assert 'Commands:' in result.output
 
     @mock.patch('haxor_news.hacker_news_cli.HackerNews.ask')
     def test_ask(self, mock_hn_call):
-        result = self.runner.invoke(self.hacker_news_cli.cli, ['ask'])
+        result = self.runner.invoke(HackerNewsCli.cli, ['ask'])
         mock_hn_call.assert_called_with(self.limit)
         assert result.exit_code == 0
 
     @mock.patch('haxor_news.hacker_news_cli.HackerNews.best')
     def test_best(self, mock_hn_call):
-        result = self.runner.invoke(self.hacker_news_cli.cli, ['best'])
+        result = self.runner.invoke(HackerNewsCli.cli, ['best'])
         mock_hn_call.assert_called_with(self.limit)
         assert result.exit_code == 0
 
     @mock.patch('haxor_news.hacker_news_cli.HackerNews.hiring_and_freelance')
     def test_hiring(self, mock_hn_call):
         result = self.runner.invoke(
-            self.hacker_news_cli.cli, ['hiring', self.dummy, '-i', 1])
+            HackerNewsCli.cli, ['hiring', self.dummy, '-i', 1])
         mock_hn_call.assert_called_with(self.dummy, 1)
         assert result.exit_code == 0
 
     @mock.patch('haxor_news.hacker_news_cli.HackerNews.hiring_and_freelance')
     def test_freelance(self, mock_hn_call):
         result = self.runner.invoke(
-            self.hacker_news_cli.cli, ['freelance', self.dummy, '-i', 1])
+            HackerNewsCli.cli, ['freelance', self.dummy, '-i', 1])
         mock_hn_call.assert_called_with(self.dummy, 1)
         assert result.exit_code == 0
 
     @mock.patch('haxor_news.hacker_news_cli.HackerNews.jobs')
     def test_jobs(self, mock_hn_call):
-        result = self.runner.invoke(self.hacker_news_cli.cli, ['jobs'])
+        result = self.runner.invoke(HackerNewsCli.cli, ['jobs'])
         mock_hn_call.assert_called_with(self.limit)
         assert result.exit_code == 0
 
     @mock.patch('haxor_news.hacker_news_cli.HackerNews.new')
     def test_new(self, mock_hn_call):
-        result = self.runner.invoke(self.hacker_news_cli.cli, ['new'])
+        result = self.runner.invoke(HackerNewsCli.cli, ['new'])
         mock_hn_call.assert_called_with(self.limit)
         assert result.exit_code == 0
 
     @mock.patch('haxor_news.hacker_news_cli.HackerNews.onion')
     def test_onion(self, mock_hn_call):
         result = self.runner.invoke(
-            self.hacker_news_cli.cli, ['onion', str(self.limit)])
+            HackerNewsCli.cli, ['onion', str(self.limit)])
         mock_hn_call.assert_called_with(self.limit)
         assert result.exit_code == 0
 
     @mock.patch('haxor_news.hacker_news_cli.HackerNews.show')
     def test_show(self, mock_hn_call):
-        result = self.runner.invoke(self.hacker_news_cli.cli, ['show'])
+        result = self.runner.invoke(HackerNewsCli.cli, ['show'])
         mock_hn_call.assert_called_with(self.limit)
         assert result.exit_code == 0
 
     @mock.patch('haxor_news.hacker_news_cli.HackerNews.top')
     def test_top(self, mock_hn_call):
-        result = self.runner.invoke(self.hacker_news_cli.cli, ['top'])
+        result = self.runner.invoke(HackerNewsCli.cli, ['top'])
         mock_hn_call.assert_called_with(self.limit)
         assert result.exit_code == 0
 
     @mock.patch('haxor_news.hacker_news_cli.HackerNews.user')
     def test_user(self, mock_hn_call):
         result = self.runner.invoke(
-            self.hacker_news_cli.cli, ['user', self.user])
+            HackerNewsCli.cli, ['user', self.user])
         mock_hn_call.assert_called_with(self.user, self.limit)
         assert result.exit_code == 0
 
@@ -104,6 +114,6 @@ class HackerNewsCliTest(unittest.TestCase):
         dummy = False
         index = '0'
         result = self.runner.invoke(
-            self.hacker_news_cli.cli, ['view', index])
+            HackerNewsCli.cli, ['view', index])
         mock_hn_call.assert_called_with(int(index), None, dummy, dummy, dummy)
         assert result.exit_code == 0

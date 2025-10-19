@@ -36,21 +36,24 @@ class CompleterTest(unittest.TestCase):
 
     def _get_completions(self, command):
         position = len(command)
-        result = set(self.completer.get_completions(
+        result = list(self.completer.get_completions(
             Document(text=command, cursor_position=position),
             self.completer_event))
         return result
 
     def verify_completions(self, commands, expected):
-        result = set()
+        result = []
         for command in commands:
-            # Call the AWS CLI autocompleter
-            result.update(self._get_completions(command))
+            # Call the haxor-news autocompleter
+            result.extend(self._get_completions(command))
         result_texts = []
+        seen = set()
         for item in result:
             # Each result item is a Completion object,
             # we are only interested in the text portion
-            result_texts.append(item.text)
+            if item.text not in seen:
+                result_texts.append(item.text)
+                seen.add(item.text)
         assert result_texts
         if len(expected) == 1:
             assert expected[0] in result_texts
@@ -60,13 +63,13 @@ class CompleterTest(unittest.TestCase):
 
     def test_blank(self):
         text = ''
-        expected = set([])
+        expected = []
         result = self._get_completions(text)
         assert result == expected
 
     def test_no_completions(self):
         text = 'foo'
-        expected = set([])
+        expected = []
         result = self._get_completions(text)
         assert result == expected
 

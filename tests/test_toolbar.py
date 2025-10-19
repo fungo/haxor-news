@@ -30,18 +30,12 @@ class ToolbarTest(unittest.TestCase):
 
     def test_toolbar_on(self):
         self.haxor.paginate_comments = True
-        expected = [
-            # (Token.Toolbar.On,
-            #  ' [F2] Paginate Comments: {0} '.format('ON')),
-            (Token.Toolbar, ' [F10] Exit ')
-        ]
-        assert expected == self.toolbar.handler(None)
+        # In prompt-toolkit 3.x, toolbar returns a string
+        expected = ' [F10] Exit '
+        assert expected == self.toolbar.handler()
 
     def test_toolbar_off(self):
         self.haxor.paginate_comments = False
-        expected = [
-            # (Token.Toolbar.Off,
-            #  ' [F2] Paginate Comments: {0} '.format('OFF')),
-            (Token.Toolbar, ' [F10] Exit ')
-        ]
-        assert expected == self.toolbar.handler(None)
+        # In prompt-toolkit 3.x, toolbar returns a string
+        expected = ' [F10] Exit '
+        assert expected == self.toolbar.handler()
